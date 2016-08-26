@@ -1,6 +1,7 @@
 package com.qfg.businesshelper.services.clients;
 
 import com.qfg.businesshelper.orders.domain.model.Order;
+import com.qfg.businesshelper.statistics.domain.model.OrderStatistics;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public interface OrderClient {
 
     @POST("orders/add")
     Observable<Order> saveOrder(@Body Order order);
+
+    @GET("orders/statics")
+    Observable<OrderStatistics> getStatistics();
 }

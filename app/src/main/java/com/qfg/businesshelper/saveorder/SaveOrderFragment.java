@@ -74,6 +74,20 @@ public class SaveOrderFragment extends BaseFragment implements SaveOrderContract
             }
         });
 
+        root.findViewById(R.id.clear_items).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.clearItems();
+            }
+        });
+
+        root.findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.saveOrder();
+            }
+        });
+
         return root;
     }
 

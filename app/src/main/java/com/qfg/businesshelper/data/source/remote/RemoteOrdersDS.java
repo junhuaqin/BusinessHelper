@@ -5,6 +5,7 @@ import com.qfg.businesshelper.data.source.local.UserPref;
 import com.qfg.businesshelper.orders.domain.model.Order;
 import com.qfg.businesshelper.services.clients.OrderClient;
 import com.qfg.businesshelper.services.generator.ServiceGenerator;
+import com.qfg.businesshelper.statistics.domain.model.OrderStatistics;
 
 import java.util.List;
 
@@ -24,5 +25,11 @@ public class RemoteOrdersDS implements OrdersDataSource {
     public Observable<Order> saveOrder(Order order) {
         OrderClient client = ServiceGenerator.createService(OrderClient.class, UserPref.getToken());
         return client.saveOrder(order);
+    }
+
+    @Override
+    public Observable<OrderStatistics> getStatistics() {
+        OrderClient client = ServiceGenerator.createService(OrderClient.class, UserPref.getToken());
+        return client.getStatistics();
     }
 }

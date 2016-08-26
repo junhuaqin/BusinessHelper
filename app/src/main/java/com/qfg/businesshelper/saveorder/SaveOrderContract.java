@@ -23,5 +23,12 @@ public interface SaveOrderContract {
         void saveOrder();
         void addNewItem();
         void addItem(Order.OrderItem item);
+        void clearItems();
+
+        void setOnOrderSavedListener(OnOrderSavedListener listener);
+
+        interface OnOrderSavedListener {
+            void onSaved(Order order);
+        }
     }
 }

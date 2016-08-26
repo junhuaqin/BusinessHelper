@@ -50,6 +50,7 @@ public class Order {
 
     public Order setItems(@NonNull List<OrderItem> items) {
         this.items = items;
+        this.totalPrice = 0;
         for (OrderItem item : this.items) {
             addTotalPrice(item);
         }
