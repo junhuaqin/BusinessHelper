@@ -93,7 +93,7 @@ public class OrdersFragment extends BaseFragment implements OrdersContract.View 
         mPresenter = presenter;
     }
 
-    public class OrdersListAdapter extends BaseExpandableListAdapter {
+    private class OrdersListAdapter extends BaseExpandableListAdapter {
         private List<Order> mOrders;
 
         public OrdersListAdapter(List<Order> orders) {
@@ -155,7 +155,7 @@ public class OrdersFragment extends BaseFragment implements OrdersContract.View 
             TextView lblListHeader = (TextView) view.findViewById(R.id.lblListHeader);
             lblListHeader.setText(String.format("%s %s %s", format.format(order.getCreatedAt()),
                     order.getSale(),
-                    Formatter.toCurrency(Formatter.toFG(order.getTotalPrice()))));
+                    Formatter.bgToShow(order.getTotalPrice())));
             return view;
         }
 
@@ -168,7 +168,7 @@ public class OrdersFragment extends BaseFragment implements OrdersContract.View 
             TextView txtListChild = (TextView) view.findViewById(R.id.lblListItem);
 
             txtListChild.setText(String.format("%s %s*%d", saleItem.getTitle(),
-                    Formatter.toCurrency(Formatter.toFG(saleItem.getUnitPrice())),
+                    Formatter.bgToShow(saleItem.getUnitPrice()),
                     saleItem.getCount()));
 
             return view;

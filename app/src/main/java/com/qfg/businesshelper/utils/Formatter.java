@@ -16,8 +16,8 @@ public class Formatter {
         return money/100.f;
     }
 
-    public static float toFG(long money) {
-        return money/100.f;
+    public static String bgToShow(int money) {
+        return toCurrency(toFG(money));
     }
 
     public static int toBG(float money) {

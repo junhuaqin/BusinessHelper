@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name">BusinessHelper</string>
 
+    <string name="submit">提交</string>
+    <string name="cancel">取消</string>
+    <string name="submitSuccess">提交成功</string>
+    <string name="totalPrice">总价:%1$s</string>
+
+    <!-- Strings related to order item -->
+    <string name="prompt_barcode">产品码</string>
+    <string name="prompt_prod_title">产品名称</string>
+    <string name="prompt_unit_price">单价</string>
+    <string name="prompt_amount">数量</string>
+    <string name="invalid_barcode">产品码无效</string>
+    <string name="invalid_title">产品名称无效</string>
+    <string name="invalid_unit_price">单价无效</string>
+    <string name="invalid_amount">数量无效</string>
+
     <!-- Strings related to order -->
     <string name="no_orders_all">没有查询到订单</string>
 </resources>

@@ -12,5 +12,5 @@ import rx.Observable;
 public interface OrdersDataSource {
 
     Observable<List<Order>> getOrders(long from, long to);
-
+    Observable<Order> saveOrder(Order order);
 }

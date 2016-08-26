@@ -19,4 +19,10 @@ public class RemoteOrdersDS implements OrdersDataSource {
         OrderClient client = ServiceGenerator.createService(OrderClient.class, UserPref.getToken());
         return client.getOrders(from, to);
     }
+
+    @Override
+    public Observable<Order> saveOrder(Order order) {
+        OrderClient client = ServiceGenerator.createService(OrderClient.class, UserPref.getToken());
+        return client.saveOrder(order);
+    }
 }

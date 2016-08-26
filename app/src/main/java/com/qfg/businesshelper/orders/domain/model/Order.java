@@ -15,7 +15,7 @@ public class Order {
     private String sale;
     private long createdAt;
     private List<OrderItem> items = new ArrayList<>();
-    private int totalPrice;
+    private int totalPrice = 0;
 
     public int getId() {
         return id;
@@ -50,21 +50,25 @@ public class Order {
 
     public Order setItems(@NonNull List<OrderItem> items) {
         this.items = items;
+        for (OrderItem item : this.items) {
+            addTotalPrice(item);
+        }
+
         return this;
+    }
+
+    private void addTotalPrice(OrderItem item) {
+        this.totalPrice += item.getUnitPrice() * item.getCount();
     }
 
     public Order addItem(@NonNull OrderItem item) {
         this.items.add(item);
+        addTotalPrice(item);
         return this;
     }
 
     public int getTotalPrice() {
         return totalPrice;
-    }
-
-    public Order setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
-        return this;
     }
 
     public static class OrderItem {
@@ -111,7 +115,7 @@ public class Order {
 
         @Override
         public String toString() {
-            return String.format("%s %s*%d", getTitle(), Formatter.toCurrency(Formatter.toFG(getUnitPrice())), getCount());
+            return String.format("%s %s*%d", getTitle(), Formatter.bgToShow(getUnitPrice()), getCount());
         }
     }
 }

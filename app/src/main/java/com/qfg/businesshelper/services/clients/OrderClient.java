@@ -4,7 +4,9 @@ import com.qfg.businesshelper.orders.domain.model.Order;
 
 import java.util.List;
 
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import rx.Observable;
 
@@ -17,4 +19,7 @@ public interface OrderClient {
             @Path("from") long from,
             @Path("to") long to
     );
+
+    @POST("orders/add")
+    Observable<Order> saveOrder(@Body Order order);
 }

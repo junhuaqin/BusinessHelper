@@ -41,37 +41,31 @@ public class OrdersPresenter implements OrdersContract.Presenter {
         GetOrders.RequestValues request = new GetOrders.RequestValues(0, System.currentTimeMillis());
         UseCaseHandler.execute(mGetOrders, request, Schedulers.io(), new Subscriber<GetOrders.ResponseValue>() {
 
-            @Override
-            public void onCompleted() {
-                if (!mOrdersView.isActive()) {
-                    return;
-                }
-
-                if (showLoadingUI) {
+            private void hideLoadingIndicator() {
+                if (mOrdersView.isActive() && showLoadingUI) {
                     mOrdersView.setLoadingIndicator(false);
                 }
+            }
+
+            @Override
+            public void onCompleted() {
+                hideLoadingIndicator();
             }
 
             @Override
             public void onError(Throwable e) {
-                if (!mOrdersView.isActive()) {
-                    return;
-                }
+                hideLoadingIndicator();
 
-                if (showLoadingUI) {
-                    mOrdersView.setLoadingIndicator(false);
+                if (mOrdersView.isActive()) {
+                    mOrdersView.showLoadingError(e);
                 }
-
-                mOrdersView.showLoadingError(e);
             }
 
             @Override
             public void onNext(GetOrders.ResponseValue responseValue) {
-                if (!mOrdersView.isActive()) {
-                    return;
+                if (mOrdersView.isActive()) {
+                    processOrders(responseValue.getOrders());
                 }
-
-                processOrders(responseValue.getOrders());
             }
         });
     }
