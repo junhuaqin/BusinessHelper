@@ -36,8 +36,7 @@
                     android:freezesText="true"
                     android:text="123,100.00"
                     android:textSize="30sp"
-                    android:textColor="@android:color/white"
-                    android:onClick="onShowOrders"/>
+                    android:textColor="@android:color/white"/>
                 <TextView
                     android:id="@+id/showOrders"
                     android:layout_width="0dp"
@@ -46,8 +45,7 @@
                     android:text=">"
                     android:textSize="30sp"
                     android:textColor="@android:color/white"
-                    android:gravity="center"
-                    android:onClick="onShowOrders"/>
+                    android:gravity="center"/>
             </LinearLayout>
             <TextView
                 android:id="@+id/curDay"

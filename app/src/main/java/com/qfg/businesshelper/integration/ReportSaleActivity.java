@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.qfg.businesshelper.R;
 import com.qfg.businesshelper.data.source.DataSourceFactory;
+import com.qfg.businesshelper.layouts.QFGBottomBar;
 import com.qfg.businesshelper.orders.domain.model.Order;
 import com.qfg.businesshelper.saveorder.SaveOrderContract;
 import com.qfg.businesshelper.saveorder.SaveOrderFragment;
@@ -22,10 +23,14 @@ public class ReportSaleActivity extends AppCompatActivity implements SaveOrderCo
     private SaveOrderPresenter mSaveOrderPresenter;
     private OrderStatPresenter mStatOrderPresenter;
 
+    private QFGBottomBar mBottomBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report_sale_act);
+
+        mBottomBar = new QFGBottomBar(0, this, savedInstanceState);
 
         OrderStatFragment statFragment =
                 (OrderStatFragment) getSupportFragmentManager().findFragmentById(R.id.orderStatFrame);
@@ -53,5 +58,14 @@ public class ReportSaleActivity extends AppCompatActivity implements SaveOrderCo
     @Override
     public void onSaved(Order order) {
         mStatOrderPresenter.loadStatistics(true);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Necessary to restore the BottomBar's state, otherwise we would
+        // lose the current tab on orientation change.
+        mBottomBar.onSaveInstanceState(outState);
     }
 }

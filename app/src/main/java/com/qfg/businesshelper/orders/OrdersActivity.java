@@ -10,7 +10,7 @@ import com.qfg.businesshelper.utils.ActivityUtils;
 
 public class OrdersActivity extends AppCompatActivity {
 
-    private OrdersPresenter presenter;
+    private OrdersPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,6 @@ public class OrdersActivity extends AppCompatActivity {
                     getSupportFragmentManager(), ordersFragment, R.id.contentFrame);
         }
 
-        presenter = new OrdersPresenter(ordersFragment, new GetOrders(DataSourceFactory.getOrdersDataSource()));
+        mPresenter = new OrdersPresenter(ordersFragment, new GetOrders(DataSourceFactory.getOrdersDataSource()));
     }
 }

@@ -40,6 +40,7 @@ public class OrderStatPresenter implements OrderStatContract.Presenter {
             @Override
             public void onCompleted() {
                 hideLoadingIndicator();
+                mFirstLoad = false;
             }
 
             @Override
@@ -53,7 +54,7 @@ public class OrderStatPresenter implements OrderStatContract.Presenter {
             @Override
             public void onNext(GetOrderStatistics.ResponseValue responseValue) {
                 if (mView.isActive()) {
-                    mView.showStatistics(responseValue.getmStatistics());
+                    mView.showStatistics(responseValue.getStatistics());
                 }
             }
         });

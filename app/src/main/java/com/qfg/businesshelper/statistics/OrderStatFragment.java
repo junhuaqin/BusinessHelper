@@ -1,5 +1,6 @@
 package com.qfg.businesshelper.statistics;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.qfg.businesshelper.BaseFragment;
 import com.qfg.businesshelper.R;
+import com.qfg.businesshelper.orders.OrdersActivity;
 import com.qfg.businesshelper.statistics.domain.model.OrderStatistics;
 import com.qfg.businesshelper.utils.Formatter;
 
@@ -45,6 +47,19 @@ public class OrderStatFragment extends BaseFragment implements OrderStatContract
 
         mCurDay = (TextView) root.findViewById(R.id.curDay);
         mCurMonth = (TextView) root.findViewById(R.id.curMon);
+        mCurMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showOrders();
+            }
+        });
+
+        root.findViewById(R.id.showOrders).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showOrders();
+            }
+        });
 
         return root;
     }
@@ -81,5 +96,10 @@ public class OrderStatFragment extends BaseFragment implements OrderStatContract
     @Override
     public void setPresenter(OrderStatContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    private void showOrders() {
+        Intent intent = new Intent(getActivity(), OrdersActivity.class);
+        getActivity().startActivity(intent);
     }
 }

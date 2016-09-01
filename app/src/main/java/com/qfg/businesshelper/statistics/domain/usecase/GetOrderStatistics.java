@@ -40,7 +40,7 @@ public class GetOrderStatistics extends UseCase<GetOrderStatistics.RequestValues
             mStat = statistics;
         }
 
-        public OrderStatistics getmStatistics() {
+        public OrderStatistics getStatistics() {
             return mStat;
         }
     }
