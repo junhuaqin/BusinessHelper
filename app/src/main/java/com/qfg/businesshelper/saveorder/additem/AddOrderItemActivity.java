@@ -6,13 +6,17 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.qfg.businesshelper.R;
 import com.qfg.businesshelper.orders.domain.model.Order;
 import com.qfg.businesshelper.utils.Formatter;
+import com.qfg.businesshelper.zxing.android.CaptureActivity;
 
 public class AddOrderItemActivity extends AppCompatActivity {
 
@@ -41,6 +45,44 @@ public class AddOrderItemActivity extends AppCompatActivity {
                 attemptDone();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_sale_item_actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_scan:
+                Intent intent = new Intent(this, CaptureActivity.class);
+                startActivityForResult(intent, 0);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            // 扫描二维码/条码回传
+            if (data != null) {
+                String content = data.getStringExtra(CaptureActivity.CODED_CONTENT_KEY);
+                int index = content.lastIndexOf('/');
+                if (index <= 0) {
+                    Toast.makeText(this, "无效的二维码", Toast.LENGTH_SHORT).show();
+                } else {
+
+                }
+            }
+        }
     }
 
     private void attemptDone() {

@@ -13,6 +13,7 @@
     <string name="cancel">取消</string>
     <string name="submitSuccess">提交成功</string>
     <string name="totalPrice">总价:%1$s</string>
+    <string name="action_scan">扫一扫</string>
 
     <!-- Strings related to order statistics -->
     <string name="curMonTotalSale">本月销售额</string>
@@ -48,4 +49,10 @@
     <!-- Strings related to mine -->
     <string name="changePassword">修改密码</string>
     <string name="logout">退出当前用户</string>
+
+    <!-- Strings related to scan -->
+    <string name="button_ok">确定</string>
+    <string name="msg_camera_framework_bug">摄像头故障</string>
+    <string name="viewfinderview_status_text1">将二维码/条码放入取景框内</string>
+    <string name="viewfinderview_status_text2">即可自动扫描</string>
 </resources>

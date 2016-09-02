@@ -41,4 +41,7 @@ dependencies {
 
     //bottom-bar
     compile 'com.roughike:bottom-bar:1.4.0.1'
+
+    //zxing
+    compile 'com.google.zxing:core:3.2.1'
 }
