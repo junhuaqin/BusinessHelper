@@ -14,11 +14,12 @@
     <string name="curMonTotalSale">本月销售额</string>
     <string name="curDayTotalSale">今日销售额:%1$s</string>
 
-    <!-- Strings related to order item -->
+    <!-- Strings related to product -->
     <string name="prompt_barcode">产品码</string>
     <string name="prompt_prod_title">产品名称</string>
     <string name="prompt_unit_price">单价</string>
     <string name="prompt_amount">数量</string>
+    <string name="prompt_left">库存</string>
     <string name="invalid_barcode">产品码无效</string>
     <string name="invalid_title">产品名称无效</string>
     <string name="invalid_unit_price">单价无效</string>

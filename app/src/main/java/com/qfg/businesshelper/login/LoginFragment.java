@@ -157,4 +157,5 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     public void setPresenter(LoginContract.Presenter presenter) {
         mPresenter = presenter;
     }
+
 }

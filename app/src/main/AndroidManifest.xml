@@ -23,6 +23,7 @@
         <activity android:name=".orders.OrdersActivity"/>
         <activity android:name=".login.LoginActivity"/>
         <activity android:name=".mine.MineActivity"/>
+        <activity android:name=".addeditproduct.AddEditProductActivity"/>
     </application>
 
 </manifest>

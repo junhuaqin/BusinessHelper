@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        finish();
+        System.exit(0);
     }
 }
 

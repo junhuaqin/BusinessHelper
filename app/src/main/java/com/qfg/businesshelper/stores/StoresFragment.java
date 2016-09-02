@@ -1,7 +1,9 @@
 package com.qfg.businesshelper.stores;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.qfg.businesshelper.BaseFragment;
 import com.qfg.businesshelper.R;
+import com.qfg.businesshelper.addeditproduct.AddEditProductActivity;
 import com.qfg.businesshelper.layouts.ScrollChildSwipeRefreshLayout;
 import com.qfg.businesshelper.stores.domain.model.Product;
 
@@ -75,6 +78,15 @@ public class StoresFragment extends BaseFragment implements StoresContract.View 
             }
         });
 
+        FloatingActionButton fab =
+                (FloatingActionButton) root.findViewById(R.id.fab_add_item);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.addNewProduct();
+            }
+        });
+
         return root;
     }
 
@@ -112,6 +124,22 @@ public class StoresFragment extends BaseFragment implements StoresContract.View 
     public void showNoProduct() {
         mNoProductView.setVisibility(View.VISIBLE);
         mProdctsView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showAddNewTask() {
+        Intent intent = new Intent(getContext(), AddEditProductActivity.class);
+        startActivityForResult(intent, AddEditProductActivity.ADD_PRODUCT);
+    }
+
+    @Override
+    public void showSuccessfullySavedMessage() {
+        showMessage(getString(R.string.submitSuccess));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mPresenter.onResult(requestCode, resultCode);
     }
 
     @Override

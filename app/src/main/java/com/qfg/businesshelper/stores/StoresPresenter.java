@@ -1,5 +1,6 @@
 package com.qfg.businesshelper.stores;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.qfg.businesshelper.UseCaseHandler;
@@ -60,6 +61,18 @@ public class StoresPresenter implements StoresContract.Presenter {
                 }
             }
         });
+    }
+
+    @Override
+    public void addNewProduct() {
+        mView.showAddNewTask();
+    }
+
+    @Override
+    public void onResult(int requestCode, int resultCode) {
+        if (Activity.RESULT_OK == resultCode) {
+            mView.showSuccessfullySavedMessage();
+        }
     }
 
     @Override

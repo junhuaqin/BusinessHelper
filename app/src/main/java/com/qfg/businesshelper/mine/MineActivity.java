@@ -16,7 +16,7 @@ public class MineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mine);
+        setContentView(R.layout.mine_act);
         mBottomBar = new QFGBottomBar(2, this, savedInstanceState);
     }
 

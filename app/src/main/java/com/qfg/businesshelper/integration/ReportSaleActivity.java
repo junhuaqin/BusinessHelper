@@ -71,10 +71,6 @@ public class ReportSaleActivity extends AppCompatActivity implements SaveOrderCo
         mBottomBar.onSaveInstanceState(outState);
     }
 
-    public void onBackPressed() {
-        finish();
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -88,5 +84,9 @@ public class ReportSaleActivity extends AppCompatActivity implements SaveOrderCo
     private void gotoLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    public void onBackPressed() {
+        System.exit(0);
     }
 }

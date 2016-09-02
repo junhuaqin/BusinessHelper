@@ -4,7 +4,9 @@ import com.qfg.businesshelper.stores.domain.model.Product;
 
 import java.util.List;
 
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import rx.Observable;
 
 /**
@@ -13,4 +15,7 @@ import rx.Observable;
 public interface ProductClient {
     @GET("products")
     Observable<List<Product>> getProducts();
+
+    @POST("products/add")
+    Observable<Product> addProduct(@Body Product product);
 }

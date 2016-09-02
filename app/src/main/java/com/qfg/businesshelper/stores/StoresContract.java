@@ -16,10 +16,15 @@ public class StoresContract {
         void showStores(List<Product> products);
         void showNoProduct();
 
+        void showAddNewTask();
+        void showSuccessfullySavedMessage();
+
         boolean isActive();
     }
 
     interface Presenter extends BasePresenter {
         void loadStores(final boolean force);
+        void addNewProduct();
+        void onResult(int requestCode, int resultCode);
     }
 }
