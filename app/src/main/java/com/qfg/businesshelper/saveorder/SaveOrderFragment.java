@@ -31,14 +31,14 @@ public class SaveOrderFragment extends BaseFragment implements SaveOrderContract
 
     private ProgressBar mPB;
     private RecyclerView mOrderItems;
-    private OrderItemApapter mAdapter;
+    private OrderItemAdapter mAdapter;
 
     private TextView mTotalPrice;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new OrderItemApapter();
+        mAdapter = new OrderItemAdapter();
     }
 
     @Override
@@ -143,7 +143,7 @@ public class SaveOrderFragment extends BaseFragment implements SaveOrderContract
         mPresenter = presenter;
     }
 
-    private class OrderItemApapter extends RecyclerView.Adapter<OrderItemApapter.ViewHolder> {
+    private class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.ViewHolder> {
         private List<Order.OrderItem> mDataset = new ArrayList<>();
 
         // Provide a reference to the views for each data item
@@ -180,7 +180,7 @@ public class SaveOrderFragment extends BaseFragment implements SaveOrderContract
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
             Order.OrderItem item = mDataset.get(position);
-            holder.mTextView.setText(String.format("%d %s %s*%d",
+            holder.mTextView.setText(String.format("%s %s %s*%d",
                     item.getBarCode(),
                     item.getTitle(),
                     Formatter.bgToShow(item.getUnitPrice()),

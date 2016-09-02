@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BusinessHelper</string>
+    <string name="app_name">生意帮</string>
     <string name="sale">销售</string>
     <string name="store">库存</string>
     <string name="account">我的</string>

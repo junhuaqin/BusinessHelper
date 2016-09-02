@@ -94,7 +94,7 @@ public class AddEditProductFragment extends BaseFragment implements AddEditProdu
         }
 
         Product product = new Product()
-                .setBarCode(Integer.valueOf(barCode))
+                .setBarCode(barCode)
                 .setTitle(title)
                 .setUnitPrice(bgPrice)
                 .setLeft(count);

@@ -73,16 +73,16 @@ public class Order {
     }
 
     public static class OrderItem {
-        private int barCode;
+        private String barCode;
         private String title;
         private int unitPrice;
         private int count;
 
-        public int getBarCode() {
+        public String getBarCode() {
             return barCode;
         }
 
-        public OrderItem setBarCode(int barCode) {
+        public OrderItem setBarCode(String barCode) {
             this.barCode = barCode;
             return this;
         }

@@ -76,7 +76,7 @@ public class AddOrderItemActivity extends AppCompatActivity {
         }
 
         Order.OrderItem item = new Order.OrderItem()
-                .setBarCode(Integer.valueOf(barCode))
+                .setBarCode(barCode)
                 .setTitle(title)
                 .setUnitPrice(bgPrice)
                 .setCount(count);

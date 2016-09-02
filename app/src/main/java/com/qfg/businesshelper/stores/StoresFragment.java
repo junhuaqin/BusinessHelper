@@ -194,9 +194,13 @@ public class StoresFragment extends BaseFragment implements StoresContract.View 
 
             Product product = getItem(i);
             TextView textView = (TextView) rowView.findViewById(android.R.id.text1);
-            textView.setText(String.format("%d %s %d", product.getBarCode(), product.getTitle(), product.getLeft()));
+            textView.setText(String.format("%s %s %d", product.getBarCode(), product.getTitle(), product.getLeft()));
 
             return rowView;
         }
+    }
+
+    public interface ProductItemListener {
+
     }
 }
