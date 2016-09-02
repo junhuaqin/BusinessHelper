@@ -1,11 +1,13 @@
 package com.qfg.businesshelper.integration;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.qfg.businesshelper.R;
 import com.qfg.businesshelper.data.source.DataSourceFactory;
 import com.qfg.businesshelper.layouts.QFGBottomBar;
+import com.qfg.businesshelper.login.LoginActivity;
 import com.qfg.businesshelper.orders.domain.model.Order;
 import com.qfg.businesshelper.saveorder.SaveOrderContract;
 import com.qfg.businesshelper.saveorder.SaveOrderFragment;
@@ -67,5 +69,24 @@ public class ReportSaleActivity extends AppCompatActivity implements SaveOrderCo
         // Necessary to restore the BottomBar's state, otherwise we would
         // lose the current tab on orientation change.
         mBottomBar.onSaveInstanceState(outState);
+    }
+
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!DataSourceFactory.getUsersDataSource().isLoggedIn(getApplicationContext())) {
+            gotoLogin();
+        } else {
+            mBottomBar.selectTab();
+        }
+    }
+
+    private void gotoLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 }

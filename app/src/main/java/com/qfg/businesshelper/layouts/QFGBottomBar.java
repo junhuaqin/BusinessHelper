@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 
 import com.qfg.businesshelper.R;
 import com.qfg.businesshelper.integration.ReportSaleActivity;
+import com.qfg.businesshelper.mine.MineActivity;
 import com.qfg.businesshelper.stores.StoresActivity;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
@@ -44,7 +45,10 @@ public class QFGBottomBar {
                         }
                         break;
                     case R.id.my_item:
-
+                        if (!(activity instanceof MineActivity)) {
+                            intent = new Intent(activity, MineActivity.class);
+                            activity.startActivity(intent);
+                        }
                         break;
                 }
             }

@@ -44,4 +44,10 @@ public class StoresActivity extends AppCompatActivity {
         // lose the current tab on orientation change.
         mBottomBar.onSaveInstanceState(outState);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBottomBar.selectTab();
+    }
 }
