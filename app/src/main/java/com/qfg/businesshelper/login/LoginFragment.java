@@ -1,5 +1,6 @@
 package com.qfg.businesshelper.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.qfg.businesshelper.BaseFragment;
 import com.qfg.businesshelper.R;
+import com.qfg.businesshelper.integration.ReportSaleActivity;
 import com.qfg.businesshelper.login.domain.model.User;
 
 import retrofit2.adapter.rxjava.HttpException;
@@ -132,7 +134,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     @Override
     public void showLoginSuccess(User user) {
-        getActivity().finish();
+        Intent intent = new Intent(getContext(), ReportSaleActivity.class);
+        startActivity(intent);
     }
 
     @Override

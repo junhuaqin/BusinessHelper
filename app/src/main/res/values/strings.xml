@@ -3,6 +3,10 @@
     <string name="sale">销售</string>
     <string name="store">库存</string>
     <string name="account">我的</string>
+    <string name="title_activity_productInfo">产品信息</string>
+    <string name="title_activity_orders">订单</string>
+    <string name="title_activity_login">登录</string>
+    <string name="title_activity_add_edit_prod">产品信息</string>
 
     <!-- Strings related to save order -->
     <string name="submit">提交</string>

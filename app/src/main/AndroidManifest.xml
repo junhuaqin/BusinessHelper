@@ -18,12 +18,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".saveorder.additem.AddOrderItemActivity"/>
+
+        <activity android:name=".saveorder.additem.AddOrderItemActivity"
+            android:label="@string/title_activity_productInfo"
+            android:parentActivityName=".integration.ReportSaleActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".integration.ReportSaleActivity" />
+        </activity>
+
         <activity android:name=".stores.StoresActivity"/>
-        <activity android:name=".orders.OrdersActivity"/>
-        <activity android:name=".login.LoginActivity"/>
+
+        <activity android:name=".orders.OrdersActivity"
+            android:label="@string/title_activity_orders"
+            android:parentActivityName=".integration.ReportSaleActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".integration.ReportSaleActivity" />
+        </activity>
+
+        <activity android:name=".login.LoginActivity"
+            android:label="@string/title_activity_login"/>
+
         <activity android:name=".mine.MineActivity"/>
-        <activity android:name=".addeditproduct.AddEditProductActivity"/>
+
+        <activity android:name=".addeditproduct.AddEditProductActivity"
+            android:label="@string/title_activity_add_edit_prod"
+            android:parentActivityName=".stores.StoresActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".stores.StoresActivity" />
+        </activity>
     </application>
 
 </manifest>
