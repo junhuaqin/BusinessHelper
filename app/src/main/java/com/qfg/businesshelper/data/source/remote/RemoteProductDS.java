@@ -15,7 +15,7 @@ import rx.Observable;
  */
 public class RemoteProductDS implements ProductsDataSource {
     @Override
-    public Observable<List<Product>> getProducts() {
+    public Observable<List<Product>> getProducts(boolean force) {
         ProductClient client = ServiceGenerator.createService(ProductClient.class, UserPref.getToken());
         return client.getProducts();
     }
@@ -31,4 +31,29 @@ public class RemoteProductDS implements ProductsDataSource {
         ProductClient client = ServiceGenerator.createService(ProductClient.class, UserPref.getToken());
         return client.getProductByQR(qr);
     }
+
+    @Override
+    public Observable<Product> getProductByBarCode(String barCode) {
+        ProductClient client = ServiceGenerator.createService(ProductClient.class, UserPref.getToken());
+        return client.getProductByBarCode(barCode);
+    }
+
+    @Override
+    public Observable<Product> getProductByTitle(String title) {
+        return Observable.empty();
+    }
+
+    @Override
+    public Observable<Product> updateProductByBarCode(Product product) {
+        ProductClient client = ServiceGenerator.createService(ProductClient.class, UserPref.getToken());
+        return client.updateProductByBarCode(product.getBarCode(), product);
+    }
+
+    @Override
+    public Observable<Boolean> deleteProductByBarCode(String barCode) {
+        ProductClient client = ServiceGenerator.createService(ProductClient.class, UserPref.getToken());
+        return client.deleteProductByBarCode(barCode);
+    }
+
+
 }

@@ -20,6 +20,10 @@ public class Formatter {
         return money/100.f;
     }
 
+    public static String fgToShow(float money) {
+        return String.format("%.2f", money);
+    }
+
     public static String bgToShow(int money) {
         return toCurrency(toFG(money));
     }

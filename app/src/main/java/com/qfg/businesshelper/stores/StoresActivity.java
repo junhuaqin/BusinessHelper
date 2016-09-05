@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.qfg.businesshelper.R;
 import com.qfg.businesshelper.data.source.DataSourceFactory;
 import com.qfg.businesshelper.layouts.QFGBottomBar;
+import com.qfg.businesshelper.stores.domain.usecase.DeleteProduct;
 import com.qfg.businesshelper.stores.domain.usecase.GetProducts;
 import com.qfg.businesshelper.utils.ActivityUtils;
 
@@ -33,7 +34,9 @@ public class StoresActivity extends AppCompatActivity {
                     getSupportFragmentManager(), storesFragment, R.id.contentFrame);
         }
 
-        mPresenter = new StoresPresenter(storesFragment, new GetProducts(DataSourceFactory.getProductsDataSource()));
+        mPresenter = new StoresPresenter(storesFragment,
+                new GetProducts(DataSourceFactory.getProductsDataSource()),
+                new DeleteProduct(DataSourceFactory.getProductsDataSource()));
     }
 
     @Override

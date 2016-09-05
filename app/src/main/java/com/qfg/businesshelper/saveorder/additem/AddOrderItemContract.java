@@ -23,5 +23,6 @@ public interface AddOrderItemContract {
     interface Presenter extends BasePresenter {
         void loadProductByQR(String qrCode);
         void loadProduct(String barCode);
+        void loadProductByTitle(String title);
     }
 }

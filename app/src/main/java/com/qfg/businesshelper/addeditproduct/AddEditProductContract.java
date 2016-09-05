@@ -12,12 +12,12 @@ public interface AddEditProductContract {
         void setSavingIndicator(boolean active);
         void showSavingSuccess();
         void showSavingError(Throwable e);
+        void editProduct(Product product);
         boolean isActive();
     }
 
     interface Presenter extends BasePresenter {
         void addProduct(Product product);
         void modifyProduct(Product product);
-        void deleteProduct(Product product);
     }
 }

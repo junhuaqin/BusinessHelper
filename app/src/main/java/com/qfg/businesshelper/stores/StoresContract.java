@@ -16,7 +16,10 @@ public class StoresContract {
         void showStores(List<Product> products);
         void showNoProduct();
 
-        void showAddNewTask();
+        void showAddNewProduct();
+        void showEditProduct(Product product);
+        void setSavingIndicator(boolean active);
+        void showSavingError(Throwable e);
         void showSuccessfullySavedMessage();
 
         boolean isActive();
@@ -25,6 +28,8 @@ public class StoresContract {
     interface Presenter extends BasePresenter {
         void loadStores(final boolean force);
         void addNewProduct();
+        void editProduct(Product product);
+        void deleteProduct(Product product);
         void onResult(int requestCode, int resultCode);
     }
 }

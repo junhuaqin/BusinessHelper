@@ -6,16 +6,21 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.qfg.businesshelper.BaseFragment;
 import com.qfg.businesshelper.R;
 import com.qfg.businesshelper.addeditproduct.AddEditProductActivity;
+import com.qfg.businesshelper.addeditproduct.AddEditProductFragment;
 import com.qfg.businesshelper.layouts.ScrollChildSwipeRefreshLayout;
 import com.qfg.businesshelper.stores.domain.model.Product;
 
@@ -58,6 +63,8 @@ public class StoresFragment extends BaseFragment implements StoresContract.View 
         //products view
         ListView listView = (ListView) root.findViewById(R.id.stores_list);
         listView.setAdapter(mListAdapter);
+        registerForContextMenu(listView);
+
         mProdctsView = root.findViewById(R.id.storesLL);
 
         // Set up progress indicator
@@ -74,7 +81,7 @@ public class StoresFragment extends BaseFragment implements StoresContract.View 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.loadStores(false);
+                mPresenter.loadStores(true);
             }
         });
 
@@ -127,9 +134,26 @@ public class StoresFragment extends BaseFragment implements StoresContract.View 
     }
 
     @Override
-    public void showAddNewTask() {
+    public void showAddNewProduct() {
         Intent intent = new Intent(getContext(), AddEditProductActivity.class);
         startActivityForResult(intent, AddEditProductActivity.ADD_PRODUCT);
+    }
+
+    @Override
+    public void showEditProduct(Product product) {
+        Intent intent = new Intent(getContext(), AddEditProductActivity.class);
+        intent.putExtra(AddEditProductFragment.ARGUMENT_EDIT_PRODUCT, new Gson().toJson(product));
+        startActivityForResult(intent, AddEditProductActivity.EDIT_PRODUCT);
+    }
+
+    @Override
+    public void setSavingIndicator(boolean active) {
+        setLoadingIndicator(active);
+    }
+
+    @Override
+    public void showSavingError(Throwable e) {
+        showLoadingError(e);
     }
 
     @Override
@@ -140,6 +164,32 @@ public class StoresFragment extends BaseFragment implements StoresContract.View 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         mPresenter.onResult(requestCode, resultCode);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getActivity().getMenuInflater().inflate(R.menu.product_item_actions, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId()) {
+            case R.id.edit: {
+                Product product = mListAdapter.getItem(info.position);
+                mPresenter.editProduct(product);
+            }
+                return true;
+            case R.id.delete: {
+                Product product = mListAdapter.getItem(info.position);
+                mPresenter.deleteProduct(product);
+            }
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     @Override

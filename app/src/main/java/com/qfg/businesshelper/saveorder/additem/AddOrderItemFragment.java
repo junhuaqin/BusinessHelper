@@ -12,6 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -31,14 +35,21 @@ public class AddOrderItemFragment extends BaseFragment implements AddOrderItemCo
     public final static String SALE_ITEM = "sale_item";
 
     private AddOrderItemContract.Presenter mPresenter;
-    private TextView mBarCode;
-    private TextView mTitle;
+    private AutoCompleteTextView mBarCode;
+    private AutoCompleteTextView mTitle;
     private TextView mUnitPrice;
     private TextView mAmount;
+    private ArrayAdapter<String> mBarCodeAdapter;
+    private ArrayAdapter<String> mTitleAdapter;
+
+    private ProgressBar mPB;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBarCodeAdapter = new ArrayAdapter<>(getContext(), android.R.layout.select_dialog_item);
+        mTitleAdapter = new ArrayAdapter<>(getContext(), android.R.layout.select_dialog_item);
     }
 
     @Override
@@ -53,10 +64,30 @@ public class AddOrderItemFragment extends BaseFragment implements AddOrderItemCo
         View root = inflater.inflate(R.layout.add_order_item_frag, container, false);
         setHasOptionsMenu(true);
 
-        mBarCode = (TextView) root.findViewById(R.id.barcode);
-        mTitle = (TextView) root.findViewById(R.id.prod_title);
+        mPB = (ProgressBar) root.findViewById(R.id.progressBar);
+
+        mBarCode = (AutoCompleteTextView) root.findViewById(R.id.barcode);
+        mTitle = (AutoCompleteTextView) root.findViewById(R.id.prod_title);
         mUnitPrice = (TextView) root.findViewById(R.id.unit_price);
         mAmount = (TextView) root.findViewById(R.id.prod_amount);
+
+        mBarCode.setAdapter(mBarCodeAdapter);
+        mBarCode.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String barCode = (String) adapterView.getItemAtPosition(i);
+                mPresenter.loadProduct(barCode);
+            }
+        });
+
+        mTitle.setAdapter(mTitleAdapter);
+        mTitle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String title = (String) adapterView.getItemAtPosition(i);
+                mPresenter.loadProductByTitle(title);
+            }
+        });
 
         FloatingActionButton fab =
                 (FloatingActionButton) root.findViewById(R.id.fab_edit_item_done);
@@ -158,7 +189,7 @@ public class AddOrderItemFragment extends BaseFragment implements AddOrderItemCo
 
     @Override
     public void setLoadingIndicator(boolean active) {
-
+        mPB.setVisibility(active?View.VISIBLE:View.GONE);
     }
 
     @Override
@@ -169,13 +200,24 @@ public class AddOrderItemFragment extends BaseFragment implements AddOrderItemCo
     @Override
     public void showProduct(Product product) {
         mBarCode.setText(product.getBarCode());
+        mBarCode.dismissDropDown();
         mTitle.setText(product.getTitle());
-        mUnitPrice.setText(Formatter.bgToShow(product.getUnitPrice()));
+        mTitle.dismissDropDown();
+        mUnitPrice.setText(Formatter.fgToShow(Formatter.toFG(product.getUnitPrice())));
     }
 
     @Override
     public void setProducts(List<Product> products) {
+        mBarCodeAdapter.clear();
+        mTitleAdapter.clear();
+        if (null == products) {
+            return;
+        }
 
+        for (Product product : products) {
+            mBarCodeAdapter.add(product.getBarCode());
+            mTitleAdapter.add(product.getTitle());
+        }
     }
 
     @Override

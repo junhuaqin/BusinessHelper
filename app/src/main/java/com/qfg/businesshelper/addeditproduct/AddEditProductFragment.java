@@ -20,6 +20,8 @@ import com.qfg.businesshelper.utils.Formatter;
  * Created by rbtq on 9/2/16.
  */
 public class AddEditProductFragment extends BaseFragment implements AddEditProductContract.View{
+    public static final String ARGUMENT_EDIT_PRODUCT = "edit_product";
+
     private AddEditProductContract.Presenter mPresenter;
     private ProgressBar mPB;
 
@@ -29,6 +31,8 @@ public class AddEditProductFragment extends BaseFragment implements AddEditProdu
     private TextView mAmount;
 
     private View mContent;
+
+    private boolean mEdit = false;
 
     @Override
     public void onResume() {
@@ -54,14 +58,14 @@ public class AddEditProductFragment extends BaseFragment implements AddEditProdu
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptAddProduct();
+                attemptSaveProduct();
             }
         });
 
         return root;
     }
 
-    private void attemptAddProduct() {
+    private void attemptSaveProduct() {
         mBarCode.setError(null);
         mTitle.setError(null);
         mUnitPrice.setError(null);
@@ -99,7 +103,11 @@ public class AddEditProductFragment extends BaseFragment implements AddEditProdu
                 .setUnitPrice(bgPrice)
                 .setLeft(count);
 
-        mPresenter.addProduct(product);
+        if (mEdit) {
+            mPresenter.modifyProduct(product);
+        } else {
+            mPresenter.addProduct(product);
+        }
     }
 
     @Override
@@ -122,6 +130,17 @@ public class AddEditProductFragment extends BaseFragment implements AddEditProdu
     @Override
     public void showSavingError(Throwable e) {
         showMessage(e.getMessage());
+    }
+
+    @Override
+    public void editProduct(Product product) {
+        mEdit = true;
+        mBarCode.setText(product.getBarCode());
+        mTitle.setText(product.getTitle());
+        mUnitPrice.setText(Formatter.fgToShow(Formatter.toFG(product.getUnitPrice())));
+        mAmount.setText(String.valueOf(product.getLeft()));
+
+        mBarCode.setEnabled(false);
     }
 
     @Override

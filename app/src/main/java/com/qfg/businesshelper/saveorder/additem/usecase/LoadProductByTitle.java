@@ -11,18 +11,18 @@ import rx.Observable;
 import rx.functions.Func1;
 
 /**
- * Created by rbtq on 9/2/16.
+ * Created by rbtq on 9/5/16.
  */
-public class LoadProductByQR  extends UseCase<LoadProductByQR.RequestValues, LoadProductByQR.ResponseValue> {
+public class LoadProductByTitle extends UseCase<LoadProductByTitle.RequestValues, LoadProductByTitle.ResponseValue> {
     private final ProductsDataSource mDataSource;
 
-    public LoadProductByQR(@NonNull ProductsDataSource dataSource) {
+    public LoadProductByTitle(@NonNull ProductsDataSource dataSource) {
         mDataSource = dataSource;
     }
 
     @Override
     protected Observable<ResponseValue> executeUseCase(RequestValues requestValues) {
-        return mDataSource.getProductByQR(requestValues.getQR())
+        return mDataSource.getProductByTitle(requestValues.getTitle())
                 .map(new Func1<Product, ResponseValue>() {
                     @Override
                     public ResponseValue call(Product product) {
@@ -32,13 +32,13 @@ public class LoadProductByQR  extends UseCase<LoadProductByQR.RequestValues, Loa
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
-        private final String mQR;
-        public RequestValues(@NonNull String qr) {
-            mQR = qr;
+        private final String mTitle;
+        public RequestValues(@NonNull String title) {
+            mTitle = title;
         }
 
-        public String getQR() {
-            return mQR;
+        public String getTitle() {
+            return mTitle;
         }
     }
 

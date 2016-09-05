@@ -24,6 +24,7 @@
 
         <activity android:name=".saveorder.additem.AddOrderItemActivity"
             android:label="@string/title_activity_productInfo"
+            android:theme="@style/NoActionBar"
             android:parentActivityName=".integration.ReportSaleActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"

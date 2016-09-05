@@ -22,7 +22,7 @@ public class GetProducts extends UseCase<GetProducts.RequestValues, GetProducts.
 
     @Override
     protected Observable<ResponseValue> executeUseCase(RequestValues requestValues) {
-        return mDataSource.getProducts().map(new Func1<List<Product>, ResponseValue>() {
+        return mDataSource.getProducts(requestValues.isForce()).map(new Func1<List<Product>, ResponseValue>() {
             @Override
             public ResponseValue call(List<Product> products) {
                 return new ResponseValue(products);
@@ -31,7 +31,14 @@ public class GetProducts extends UseCase<GetProducts.RequestValues, GetProducts.
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
+        private final boolean mForce;
+        public RequestValues(boolean force) {
+            mForce = force;
+        }
 
+        public boolean isForce() {
+            return mForce;
+        }
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {

@@ -7,7 +7,10 @@ import android.support.v7.widget.Toolbar;
 
 import com.qfg.businesshelper.R;
 import com.qfg.businesshelper.data.source.DataSourceFactory;
+import com.qfg.businesshelper.saveorder.additem.usecase.LoadProductByBarCode;
 import com.qfg.businesshelper.saveorder.additem.usecase.LoadProductByQR;
+import com.qfg.businesshelper.saveorder.additem.usecase.LoadProductByTitle;
+import com.qfg.businesshelper.stores.domain.usecase.GetProducts;
 import com.qfg.businesshelper.utils.ActivityUtils;
 
 public class AddOrderItemActivity extends AppCompatActivity {
@@ -35,7 +38,11 @@ public class AddOrderItemActivity extends AppCompatActivity {
                     getSupportFragmentManager(), addOrderItemFragment, R.id.contentFrame);
         }
 
-        mPresenter = new AddOrderItemPresenter(addOrderItemFragment, new LoadProductByQR(DataSourceFactory.getProductsDataSource()));
+        mPresenter = new AddOrderItemPresenter(addOrderItemFragment,
+                new LoadProductByQR(DataSourceFactory.getProductsDataSource()),
+                new LoadProductByBarCode(DataSourceFactory.getProductsDataSource()),
+                new LoadProductByTitle(DataSourceFactory.getProductsDataSource()),
+                new GetProducts(DataSourceFactory.getProductsDataSource()));
     }
 
     @Override
