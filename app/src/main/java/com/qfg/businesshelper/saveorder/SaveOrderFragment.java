@@ -7,7 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -150,18 +152,43 @@ public class SaveOrderFragment extends BaseFragment implements SaveOrderContract
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
             // each data item is just a string in this case
             public TextView mTextView;
             public ViewHolder(View v) {
                 super(v);
                 mTextView = (TextView) v.findViewById(android.R.id.text1);
+                v.setOnCreateContextMenuListener(this);
+            }
+
+            @Override
+            public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+                getActivity().getMenuInflater().inflate(R.menu.sale_item_actions, contextMenu);
+                contextMenu.findItem(R.id.delete).setOnMenuItemClickListener(this);
+            }
+
+
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.delete: {
+                        Order.OrderItem orderItem = mAdapter.getItem((Integer)mTextView.getTag());
+                        mPresenter.deleteItem(orderItem);
+                    }
+                    return true;
+                    default:
+                        return false;
+                }
             }
         }
 
         public void replace(List<Order.OrderItem> items) {
             mDataset = items;
             notifyDataSetChanged();
+        }
+
+        public Order.OrderItem getItem(int i) {
+            return mDataset.get(i);
         }
 
         // Create new views (invoked by the layout manager)
@@ -186,6 +213,7 @@ public class SaveOrderFragment extends BaseFragment implements SaveOrderContract
                     item.getTitle(),
                     Formatter.bgToShow(item.getUnitPrice()),
                     item.getCount()));
+            holder.mTextView.setTag(position);
         }
 
         // Return the size of your dataset (invoked by the layout manager)

@@ -62,9 +62,32 @@ public class Order {
         this.totalPrice += item.getUnitPrice() * item.getCount();
     }
 
+    private void minusTotalPrice(OrderItem item) {
+        this.totalPrice -= item.getUnitPrice() * item.getCount();
+    }
+
     public Order addItem(@NonNull OrderItem item) {
-        this.items.add(item);
+        boolean bFind = false;
+        for (OrderItem orderItem : this.items) {
+            if (orderItem.getBarCode().equals(item.getBarCode())
+                && orderItem.getUnitPrice() == item.getUnitPrice()) {
+                orderItem.setCount(orderItem.getCount()+item.getCount());
+                bFind = true;
+                break;
+            }
+        }
+
+        if (!bFind) {
+            this.items.add(item);
+        }
+        
         addTotalPrice(item);
+        return this;
+    }
+
+    public Order deleteItem(@NonNull OrderItem item) {
+        this.items.remove(item);
+        minusTotalPrice(item);
         return this;
     }
 

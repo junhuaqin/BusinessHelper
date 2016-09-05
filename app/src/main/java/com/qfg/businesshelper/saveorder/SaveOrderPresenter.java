@@ -96,4 +96,10 @@ public class SaveOrderPresenter implements SaveOrderContract.Presenter {
             mView.showOrder(mOrder);
         }
     }
+
+    @Override
+    public void deleteItem(Order.OrderItem item) {
+        mOrder.deleteItem(item);
+        mView.showOrder(mOrder);
+    }
 }
