@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by rbtq on 8/25/16.
  */
 public class ServiceGenerator {
-    public static final String API_BASE_URL = "http://52.68.31.246/ctu/v1/";
+    public static final String API_BASE_URL = "http://52.197.213.21/ctu/v1/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

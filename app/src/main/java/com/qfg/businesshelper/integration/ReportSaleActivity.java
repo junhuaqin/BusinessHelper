@@ -87,6 +87,6 @@ public class ReportSaleActivity extends AppCompatActivity implements SaveOrderCo
     }
 
     public void onBackPressed() {
-        System.exit(0);
+        finishAffinity();
     }
 }
