@@ -18,6 +18,7 @@ import com.qfg.businesshelper.BaseFragment;
 import com.qfg.businesshelper.R;
 import com.qfg.businesshelper.orders.domain.model.Order;
 import com.qfg.businesshelper.saveorder.additem.AddOrderItemActivity;
+import com.qfg.businesshelper.saveorder.additem.AddOrderItemFragment;
 import com.qfg.businesshelper.utils.Formatter;
 
 import java.util.ArrayList;
@@ -120,7 +121,7 @@ public class SaveOrderFragment extends BaseFragment implements SaveOrderContract
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Activity.RESULT_OK == resultCode) {
             Order.OrderItem item = new Gson().fromJson(
-                    data.getBundleExtra(AddOrderItemActivity.SALE_ITEM).getString(AddOrderItemActivity.SALE_ITEM),
+                    data.getBundleExtra(AddOrderItemFragment.SALE_ITEM).getString(AddOrderItemFragment.SALE_ITEM),
                     Order.OrderItem.class);
 
             mPresenter.addItem(item);

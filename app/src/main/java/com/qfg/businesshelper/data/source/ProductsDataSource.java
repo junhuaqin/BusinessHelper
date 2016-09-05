@@ -12,4 +12,5 @@ import rx.Observable;
 public interface ProductsDataSource {
     Observable<List<Product>> getProducts();
     Observable<Product> addProduct(Product product);
+    Observable<Product> getProductByQR(String qr);
 }

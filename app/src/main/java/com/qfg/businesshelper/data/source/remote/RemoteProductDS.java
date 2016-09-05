@@ -25,4 +25,10 @@ public class RemoteProductDS implements ProductsDataSource {
         ProductClient client = ServiceGenerator.createService(ProductClient.class, UserPref.getToken());
         return client.addProduct(product);
     }
+
+    @Override
+    public Observable<Product> getProductByQR(String qr) {
+        ProductClient client = ServiceGenerator.createService(ProductClient.class, UserPref.getToken());
+        return client.getProductByQR(qr);
+    }
 }

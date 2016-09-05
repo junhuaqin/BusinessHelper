@@ -7,6 +7,7 @@ import java.util.List;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -18,4 +19,7 @@ public interface ProductClient {
 
     @POST("products/add")
     Observable<Product> addProduct(@Body Product product);
+
+    @GET("products/qr/{qrCode}")
+    Observable<Product> getProductByQR(@Path("qrCode") String qr);
 }
