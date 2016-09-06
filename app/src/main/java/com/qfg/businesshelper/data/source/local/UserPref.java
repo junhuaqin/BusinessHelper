@@ -45,8 +45,7 @@ public class UserPref {
     }
 
     public static String getToken() {
-        //return String.format("%s:%s", getLoggedInUserName(), getLoggedInToken());
-        return "admin:admin";
+        return String.format("%s:%s", getLoggedInUserName(), getLoggedInToken());
     }
 
     public static boolean isLoggedIn(Context ctx) {
